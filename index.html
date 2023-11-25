@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starbhak Mart</title>
+
+    <!-- bootstrap, boxicons, font-awesome -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" />
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <style>
+        .card-img-top{
+            height: 130px;
+            object-fit: cover;
+        }
+
+        .button{
+            transition: all 0.3s ease;
+        }
+
+        .button:active{
+            transform: scale(0.9);
+        }
+
+        .btn{
+            transition: all 0.3s ease;
+        }
+
+        .btn:active{
+            transform: scale(0.9);
+        }
+
+        .row .mt-1{
+            height: 12vh;
+        }
+
+        .list-order{
+            flex-direction: inherit;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- navbar -->
+    <nav class="navbar p-1 navbar-expand-lg" data-bs-theme="dark" style="background-color: #0070BA;" id="nav-bar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <h5>Starbhak Mart</h5>
+            </a>    
+        </div>
+    </nav>
+    
+    <div class="container-fluid">
+        <div class="row mt-1">
+            <div id="content" class="col-lg-4 col-md-12">
+
+                <!-- pilihan pesanan -->
+                <div class="row m-1">
+                    <div class="col">
+                        <div class="row">
+                            <select id="order-type" class="form-select text-center text-white" style="background-color: #019FED; font-weight: bold; font-family:  Arial, Helvetica, sans-serif;">
+                                <option hidden>Pesanan</option>
+                                <option value="1">Take Away</option>
+                                <option value="2">Dine In</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- kasir -->
+                <div class="row m-1">
+                    <div class="col m-0">
+                        <div class="row">
+                            <button class="btn text-center text-white" id="kasir" type="button" style="background-color: #019FED; font-family: Arial, Helvetica, sans-serif; font-weight: bold;">
+                                <i class='bx bxs-user bx-sm'></i>
+                                Mang.Jay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid border" id="list-order">
+                    <div class="row list-order" style="height: 330px; overflow-y: scroll;">
+                        <div class="col m-1">
+
+                            <!-- <div class="row mt-1 border" id="card-item" style="display: flex;">
+                                <div class="col-md-10 p-2 m-0" id="prdk" style="display: flex; justify-content: space-between; height: 0.7cm;">
+                                    <p id="product-name" style="font-weight: bold; font-size: 1.1rem;">Iced Tea</p>
+                                    <p id="product-price" style="font-family: monospace; font-weight: bold; font-size: 1.1rem;">Rp. 7.000</p>
+                                </div>
+                                <div class="col-md-10 p-0 m-0" id="detail" style="display: flex; justify-content: space-around; height: 0cm;">
+                                    <p id="unit-price" style="font-size: 1rem;">Unit Price : </p>
+                                    <p id="price" style="font-family: monospace; font-weight: bold; font-size: 1.1rem;">Rp. 7.000</p>
+                                    <p id="quantity" style="font-size: 1rem;">Quantity : </p>
+                                    <p class="product-quantity" id="qty_${nameProduct}" style="font-size: 1rem;">1</p>
+                                </div>
+                                <div class="col-md-2 p-0 m-0" id="btn-delete" style="display: flex; justify-content: space-around;">
+                                    <i class='bx bx-trash bx-md bx-pull-right' id="trash-icon"></i>
+                                </div>
+                            </div> -->
+
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="card mt-2 bill" id="tampilan">
+                    <div class="row total-harga ">
+                        <div class="col m-2">
+                            <div class="row ">
+                                <div class="col-md-12">
+                                    <h6>Discount : </h6>
+                                    <!-- <h6 id="total-price" style="display: none;"></h6> -->
+                                </div>
+                                <div class="col-md-12" style="display: flex; justify-content: space-between;">
+                                    <h6>PPN 10% : </h6>
+                                    <h6 style="font-family: monospace; font-weight: bold;" id="tax-ppn">Rp. </h6>
+                                </div>
+                                <div class="col-md-12 p-1 text-white">
+                                    <div style="padding-left: 0.5rem; padding-right: 0.5rem; background-color: #019FED;">
+                                        <div id="pay-bill" style="display: flex; justify-content: space-between;">
+                                            <h6 style="font-weight: bold;">Total Amount : </h6>
+                                            <h6 id="total-amount" style="font-family: monospace; font-weight: bold;">Rp. </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-md-12 container" id="item-list">
+                <div class="row mt-1">
+                    <div class="col-sm-12">
+                        <nav class="navbar bg-body-secondary p-1" id="nav">
+                            <div class="container-fluid">
+                                <a class="navbar-brand" href="#">
+                                    <h6>Item List</h6>
+                                </a>
+                                <div class="d-flex">
+                                <div class="search">
+                                    <i class='bx bx-search bx-sm' id="search-icon"></i>
+                                    <input type="text" id="searchInput" placeholder="search" style="display: none;">
+                                </div>
+                                <div class="more">
+                                    <i class='bx bx-dots-vertical-rounded ms-auto bx-sm'></i>
+                                </div>
+                                <div class="sort">
+                                    <i class='bx bx-transfer-alt bx-rotate-90 ms-auto bx-sm' id="sort-icon"></i>
+                                </div>
+                                </div>
+                            </div>
+                        </nav>
+                
+                    <div class="container border mt-2 p-2" id="product-list-container">
+                        <div class="row product-list" style="height: 400px; overflow-y: scroll;">
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-0"></div>
+                                <div class="card" onclick="tambahpesanan('Orange Juice', 1, 8000)">
+                                    <img src="img/drink1.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Orange Juice</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.8.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-0"></div>
+                                <div class="card" onclick="tambahpesanan('Ice Tea', 1, 7000)">
+                                    <img src="img/drink2.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Ice Tea</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.7.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-0"></div>
+                                <div class="card" onclick="tambahpesanan('Matcha Latte', 1, 17000)">
+                                    <img src="img/drink3.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Matcha Latte</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.17.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-0"></div>
+                                <div class="card" onclick="tambahpesanan('Boba Milk Tea', 1, 15000)">
+                                    <img src="img/drink4.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Boba Milk Tea</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.15.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-0"></div>
+                                <div class="card" onclick="tambahpesanan('Ice Cappucinno', 1, 18000)">
+                                    <img src="img/drink5.png" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Ice Cappucino</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.18.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-0"></div>
+                                <div class="card" onclick="tambahpesanan('Ice Lemon Tea', 1, 10000)">
+                                    <img src="img/drink6.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Ice Lemon Tea</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.10.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-2"></div>
+                                <div class="card" onclick="tambahpesanan('Beef Burger', 1, 24000)">
+                                    <img src="img/food1.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Beef Burger</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.24.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-2"></div>
+                                <div class="card" onclick="tambahpesanan('Dimsum', 1, 25000)">
+                                    <img src="img/food2.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Dimsum</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.25.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-2"></div>
+                                <div class="card" onclick="tambahpesanan('Sandwich', 1, 22000)">
+                                    <img src="img/food3.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Sandwich</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.22.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-2"></div>
+                                <div class="card" onclick="tambahpesanan('Onion Rings', 1, 20000)">
+                                    <img src="img/food4.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Onion Rings</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.20.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-2"></div>
+                                <div class="card" onclick="tambahpesanan('Beef Kebab', 1, 24000)">
+                                    <img src="img/food5.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Beef Kebab</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.24.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-2"></div>
+                                <div class="card" onclick="tambahpesanan('Kimbab', 1, 23000)">
+                                    <img src="img/food6.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Kimbab</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.23.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-2"></div>
+                                <div class="card" onclick="tambahpesanan('Corndog', 1, 10000)">
+                                    <img src="img/snack1.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Corndog</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.10.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-2"></div>
+                                <div class="card" onclick="tambahpesanan('Pancake', 1, 12000)">
+                                    <img src="img/snack2.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Pancake</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.12.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-2"></div>
+                                <div class="card" onclick="tambahpesanan('Donut', 1, 8000)">
+                                    <img src="img/snack3.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Donut</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.8.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-2"></div>
+                                <div class="card" onclick="tambahpesanan('Risol Mayo', 1, 7000)">
+                                    <img src="img/snack4.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Risol Mayo</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.7.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-2"></div>
+                                <div class="card" onclick="tambahpesanan('Onde-Onde', 1, 5000)">
+                                    <img src="img/snack5.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Onde-Onde</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.5.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-sm-6" id="product">
+                                <div class="card-deck mt-2"></div>
+                                <div class="card" onclick="tambahpesanan('Mochi', 1, 10000)">
+                                    <img src="img/snack6.jpg" class="card-img-top" id="img-product">
+                                    <div class="card-body text-center m-0 p-0">
+                                        <h6 class="card-title m-0" style="font-size: 1rem;">Mochi</h6>
+                                        <p class="card-text" style="font-size: 0.9rem;">Rp.10.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col Payment">
+                            <button onclick="print()" type="button" class="btn btn-lg btn-block m-1 p-1" style="float: right; font-size: 1rem; font-weight: 500; width: 5cm; height: 1.5cm; width: 5cm; background-color: #019FED;" id="Payment-button">
+                                <div class="col text-center">
+                                    <i class='bx bx-printer bx-sm'></i>
+                                    Payment
+                                    <br>
+                                    (CTRL + P)
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                        
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+
+    function print() {
+        var contentDiv = document.getElementById('content');
+        var contentToPrint = contentDiv.innerHTML;
+        var newWindow = window.open('', '_blank');
+        newWindow.document.open();
+        newWindow.document.write(  contentToPrint  );
+        newWindow.document.close();
+        newWindow.print();
+    }
+    var cart = [];
+    function tambahpesanan(name, count, price) {
+        var existingItem = cart.find(element => element.name === name);
+        if (!existingItem) {
+            cart.push({ name: name, count: count, price: price });
+        } else {
+            existingItem.count++;
+        }
+        showCartList();
+    }
+
+
+
+    function showCartList() {
+        $(".list-order").empty();
+        totalHarga = 0 ;
+        cart.forEach(function (item, index) {
+            $(".list-order").append(`
+            <div class="row mt-1 border" id="card-item" style="display: flex;">
+                <div class="col-md-10 p-2 m-0" id="prdk" style="display: flex; justify-content: space-between; height: 5vh; max-height: 5vh;">
+                    <p id="product-name" style="font-weight: bold; font-size: 1.1rem;"> `+ item.name +` </p>
+                    <p id="product-price" style="font-family: monospace; font-weight: bold; font-size: 1.1rem;">Rp. `+ item.price +` </p>
+                </div>
+                <div class="col-md-10 p-0 m-0" id="detail" style="display: flex; justify-content: space-around; height: 5vh; max-height: 5vh;">
+                    <p id="unit-price" style="font-size: 1rem;">Unit Price : </p>
+                    <p id="price" style="font-family: monospace; font-weight: bold; font-size: 1.1rem;">Rp. ` + item.price + ` </p>
+                    <p id="quantity" style="font-size: 1rem;">Quantity : </p>
+                    <p class="product-quantity" style="font-size: 1rem;"> `+ item.count +` </p>
+                </div>
+                <div class="col-md-2 p-0 m-0" id="btn-delete" style="display: flex; justify-content: space-around;">
+                    <i class='bx bx-trash bx-md bx-pull-right' onclick="Hapus(` + index + `)"></i>
+                </div>
+            </div>
+            `);
+                        })
+                        console.log(cart)
+                        var tot = 0;
+                        var pjkpersentase = 0.1;
+                        var totalpajak = 0;
+                        for(var i = 0; i < cart.length; i++) {
+                            tot = tot + (cart[i].count * cart[i].price)
+                        }
+                        var Pajak = tot * pjkpersentase;
+                        totalpajak += Pajak;
+                        var total = Pajak + tot;
+
+                        $("#tax-ppn").text("Rp. " + Pajak)
+                        $("#total-amount").text("Rp. " + total)
+                    }
+                    function Hapus(index) {
+                        let text;
+                        if (confirm (cart.splice(index, 1) && "Apakah Anda Yakin Untuk menghapus pesanan?")) {
+                            showCartList();
+                        } 
+
+                    }
+
+    
+
+</script>
+
+</html>
